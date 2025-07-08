@@ -1,6 +1,6 @@
 # Progetto lab 24/25
 
-##1. Parsing del file name.basics.tsv  
+## 1. Parsing del file name.basics.tsv  
 Eseguo un ciclo while che legge una linea del file alla volta con la funzione redLine(), e termina quando non ci sono più linee da leggere. All'interno del while salvo in un array ogni campo della riga tramite la funzione .split("\\t") (ogni campo di una riga è diviso da un \t). Poi controllo che il terzo campo (la data di nascita) sia definito, quindi diverso da "\N" (in tal caso salto la riga andando all'iterzione dopo del while) tramite la funzione .eqals(). A questo punto faccio un altro split sul quinto campo, le professioni (divise da una ","), e controllo con un cilco for che almeno una delle professioni sia "actor" o "actress" tramite la funzione .equals(). Se anche quest'ultima condizione fosse valida allora posso salvare i dati della riga all'interno di una TreeMap dove ogni chiave rappresenta il codice di un attore, preso tramite le funzioni .substring(2) (per togliere la parte "nm" dal codice) e Integer.parseInt (per renderlo un intero) applicate al primo campo, e il valore associato alla chiave è una variabile di tipo Attore (definito dalla struct default) che contiene i dati precedenti con in aggiunta il secondo campo, il nome. Aalla fine del parsing si ottiene una struttura TreeMap <codice, Attore> dove Attore contiene i campi codice, nome e anno di nascita
 
 °°2
