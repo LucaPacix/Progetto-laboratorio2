@@ -36,8 +36,7 @@ def stampa_collaborazioni(id1, id2, partecipazioni, titoli):
         return
     else:
         print(str(id1) + "." + str(id2) + ": " + str(len(titoli_comuni)) + " collaborazioni:")
-        tit_com_odrinati = sorted(titoli_comuni) #non so ancora se devo sortare o no i codici
-        for codice in tit_com_odrinati:
+        for codice in titoli_comuni:
             print(str(codice) + " " + titoli[codice])
 
 def main():
