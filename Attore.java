@@ -1,5 +1,5 @@
 import java.util.Set;
-import java.util.TreeSet;
+import java.util.HashSet;
 
 public class Attore {
     int codice;                   // codice univoco dell'attore
@@ -11,6 +11,6 @@ public class Attore {
         this.codice = codice;
         this.nome = nome;
         this.anno = anno;
-        this.coprotagonisti = new TreeSet<Integer>();
+        this.coprotagonisti = new HashSet<Integer>();
     }
 }
