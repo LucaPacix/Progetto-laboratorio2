@@ -27,7 +27,6 @@ public class CreaGrafo{
                     }
                 }
             }
-            System.out.println("finito di leggere gli attori");
             fileAtt.close();
         }
         catch (Exception e) {
@@ -42,7 +41,6 @@ public class CreaGrafo{
                 scrittura.write(linea); //accetta solo stringhe
                 scrittura.newLine(); //passo a scrivere sulla liena dopo
             }
-            System.out.println("finito di stampare gli attori");
             scrittura.close();
         } catch (Exception e) {
             System.err.println(e+" hai sbagliato qualcosa nella scrittura in nomi.txt");
@@ -67,7 +65,6 @@ public class CreaGrafo{
                     attfilm.get(codiceAtt).add(codiceFilm); //aggiungo codicifilm al mio Attore
                 }
             }
-            System.out.println("finito di leggere i film");
             fileFilm.close();
         }
         catch (Exception e){
@@ -86,7 +83,6 @@ public class CreaGrafo{
                     }
                 }
             }
-            System.out.println("finito di aggiornare i coprotagonisti");
         } 
         catch (Exception e) {
             System.err.println(e+" hai sbagliato qualcosa nello scrivere i coprotagonisti");
@@ -108,7 +104,6 @@ public class CreaGrafo{
                 scrittura.write(linea.toString());
                 scrittura.newLine();
             }
-            System.out.println("finito di stampare i coprotagonisti");
             scrittura.close();
         } 
         catch (Exception e) {
@@ -137,7 +132,6 @@ public class CreaGrafo{
                 scrittura.write(linea.toString());
                 scrittura.newLine();
             }
-            System.out.println("finito di stamapre i film degli attori");
             scrittura.close();
         }
         catch (Exception e){
