@@ -655,6 +655,7 @@ int main(int argc, char* argv[]){
         exit(EXIT_FAILURE);
     }
 
+    clock_t start = clock();   //debug
     if(argc != 4){             //controllo standard
         fprintf(stderr, "Numnero argomenti insufficiente");
         exit(EXIT_FAILURE);
@@ -791,6 +792,7 @@ int main(int argc, char* argv[]){
         perror("Errore unlock mutex stato_seg");
         exit(EXIT_FAILURE);
     }
+    printf("Reader: pipe aperta in lettura (fd = %d)\n", pipe); //debug
 
 
     int32_t* buf_pipe = malloc(2 * sizeof(int32_t));      //creo il buf per i 2 elemnti che leggo dalla pipe alla volta
@@ -806,6 +808,8 @@ int main(int argc, char* argv[]){
         int termina = stato.termina_pipe;   //controllo a ogni ciclo se è arrivato un SIGINT
         pthread_mutex_unlock(&stato.mutex_fase);
         if (termina) { //uscita forzata da SIGINT
+            printf("Uscita forzata, smetto di leggere \n");  //debug
+            fflush(stdout); 
             break;                                          
         }                     
         nread = read(pipe, buf_pipe, 2 * sizeof(int32_t));  //leggo esattamente 2 int32
@@ -816,6 +820,8 @@ int main(int argc, char* argv[]){
         }
         int cod1 = buf_pipe[0];   //primo elemento nel buf è cod1
         int cod2 = buf_pipe[1];   //secondo elemento nel buf è cod2
+        printf("Lettura coppia da pipe: %d %d\n", cod1, cod2); //debug
+        fflush(stdout); 
 
         args_richiesta* args = malloc(sizeof(*args));    //qui ogni thread prenderà argomenti diversi, di conseguenza ogni thread richiesta dovrà
         if (!args) {                                     //avere una sua struct dedicata, quindi devo fare malloc
@@ -860,5 +866,9 @@ int main(int argc, char* argv[]){
 
     cleanup(&stato); //dealloco tutto 
 
+    clock_t end = clock(); //debug
+    double tempo_trascorso = (double)(end - start) / CLOCKS_PER_SEC; //debug
+    printf("finitooooo \n"); //debug
+    printf("Tempo impiegato: %.3f secondi\n", tempo_trascorso); //debug
     return 0;
 }
