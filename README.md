@@ -24,11 +24,6 @@ Al termine della risalita, l’array contiene i nodi del cammino in ordine inver
 Una volta che il thread gestore segnali si sveglia dalla **sigwait**, valuta lo stato di due variabili condivise _fase pipe_ e _fase programma_ con l’uso di una mutex, per capire cosa deve fare. Dopo aver fatto i controlli per determinare il tipo di azione da eseguire, se il segnale di terminazione arriva quando la _fase pipe_ è ancora a 0, allora stampa il messaggio _**"Costruzione grafo in corso"**_ e torna in attesa. Nel caso in cui debba terminare il programma principale (_fase pipe_ diversa da 0), aggiorna semplicemente una variabile condivisa (_termina pipe_), sempre con l’uso della mutex, e termina. Il programma principale, durante la lettura della pipe, controllerà a ogni iterazione se la variabile _termina pipe_ è stata aggiornata e, in tal caso, termina immediatamente.
 
 
-
-
-
-
-
-
-
+## 5. Come vengono memorizzate e gestite le partecipazioni degli attori
+Per memorizzare le partecipazioni il programma utilizza una struttura dati **HashMap<Integer, HashSet<Integer>>** chiamata _attfilm_, che associa a ogni attore un set contenente i codici dei film a cui ha partecipato. Durante la lettura del file delle partecipazioni, per ogni attore valido viene aggiornato il set dei film corrispondenti. Successivamente, per la scrittura del file _partecipazioni.txt_, il programma scorre tutti gli attori presenti nella mappa principale, recupera la lista dei film di ogni attore da _attfilm_ (se presente), ordina questa lista in ordine crescente, e costruisce una riga formattata con il codice dell’attore, il numero di film a cui ha partecipato e la lista dei codici film separati da tabulazioni.
 
