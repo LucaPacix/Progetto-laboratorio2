@@ -20,5 +20,15 @@ Quando la BFS termina con successo, viene creato un array dinamico che conterrà
 Al termine della risalita, l’array contiene i nodi del cammino in ordine inverso quindi per stampare il cammino nel corretto ordine si percorre l’array al **contrario**. Per ogni codice nodo presente nell’array, si esegue una ricerca binaria **bsearch()** nell’array degli attori per recuperare le informazioni dettagliate (codice, nome, anno). Queste informazioni vengono quindi scritte sul file di output ottenendo quindi infine la stampa ordinata del cammino minimo con le informazioni appropriate.
 
 
+## 4. Il thread gestore segnali comunica al programma principale di interrompere l'elaborazione
+Una volta che il thread gestore segnali si sveglia dalla **sigwait**, valuta lo stato di due variabili condivise _fase pipe_ e _fase programma_ con l’uso di una mutex, per capire cosa deve fare. Dopo aver fatto i controlli per determinare il tipo di azione da eseguire, se il segnale di terminazione arriva quando la _fase pipe_ è ancora a 0, allora stampa il messaggio _**"Costruzione grafo in corso"**_ e torna in attesa. Nel caso in cui debba terminare il programma principale (_fase pipe_ diversa da 0), aggiorna semplicemente una variabile condivisa (_termina pipe_), sempre con l’uso della mutex, e termina. Il programma principale, durante la lettura della pipe, controllerà a ogni iterazione se la variabile _termina pipe_ è stata aggiornata e, in tal caso, termina immediatamente.
+
+
+
+
+
+
+
+
 
 
