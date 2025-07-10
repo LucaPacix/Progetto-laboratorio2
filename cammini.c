@@ -629,8 +629,6 @@ void* richiesta(void* arg){
     return NULL;
 }
 
-//ripassare semafori C
-
 int main(int argc, char* argv[]){
     sigset_t mask;      //creo la mia variabile per mascherare i segnali
     sigemptyset(&mask);      //creo un set con la mia variabile
@@ -839,10 +837,10 @@ int main(int argc, char* argv[]){
         }
     }
     if (nread < 0) {   
-    perror("Errore read dalla pipe");
+        perror("Errore read dalla pipe");
     }
     close(pipe);  
-    unlink("cammini.pipe"); //forse devo cancellare la pipe
+    unlink("cammini.pipe"); 
     free(buf_pipe);   
     
     
